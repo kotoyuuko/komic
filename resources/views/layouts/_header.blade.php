@@ -9,10 +9,10 @@
       <li><a href="{{ route('root') }}">home</a></li>
       <li><a href="{{ route('upload') }}">upload</a></li>
       <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">logout</a></li>
-      <form id="logout-form" action="{{ route('logout') }}" method="POST">
-        {{ csrf_field() }}
-      </form>
       @endguest
     </ul>
   </nav>
 </header>
+<form id="logout-form" action="{{ route('logout') }}" method="POST">
+  {{ csrf_field() }}
+</form>

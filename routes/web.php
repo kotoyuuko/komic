@@ -9,5 +9,6 @@ Route::post('/logout', 'Auth\\LoginController@logout')->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'PagesController@root')->name('root');
     Route::get('/comic/{name}', 'ComicsController@viewer')->name('comic.viewer');
-    Route::get('/upload', 'PagesController@upload')->name('upload');
+    Route::get('/upload', 'ComicsController@showUploadForm')->name('upload');
+    Route::post('/upload', 'ComicsController@upload');
 });
