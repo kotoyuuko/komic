@@ -8,6 +8,10 @@
 
 标准的 Laravel 应用安装方法，请自行查阅 Laravel 官方部署文档。
 
+注意安装后需要生成 JWT Secret
+
+    php artisan jwt:secret
+
 ## License
 
 The Unlicense
