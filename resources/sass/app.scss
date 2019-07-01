@@ -86,3 +86,56 @@ form {
         width: 100px;
     }
 }
+
+.root-page {
+    .comic-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        width: 450px;
+
+        .comic-item {
+            text-align: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            margin-bottom: 20px;
+
+            img {
+                width: 140px;
+                height: 200px;
+            }
+        }
+    }
+}
+
+.pagination {
+    margin-top: 20px;
+    padding: 0 20px;
+    height: 20px;
+    font-size: 14px;
+    color: $keshizumi;
+
+    li {
+        list-style: none;
+        display: inline-block;
+
+        a {
+            text-decoration: none;
+            color: $keshizumi;
+        }
+
+        a:hover {
+            color: $kuro;
+        }
+    }
+
+    li.prev {
+        float: left;
+    }
+
+    li.next {
+        float: right;
+    }
+}

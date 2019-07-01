@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class PagesController extends Controller
 {
-    public function root()
+    public function root(Request $request)
     {
-        return view('pages.root');
+        $comics = $request->user()->comics()->simplePaginate(15);
+
+        return view('pages.root', compact('comics'));
     }
 }
