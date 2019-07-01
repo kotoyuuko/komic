@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comic;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
@@ -10,9 +11,83 @@ use Storage;
 
 class ComicsController extends Controller
 {
-    public function viewer($name)
+    public function viewer(Request $request, $name)
     {
-        return $name;
+        $token = Auth::guard('api')->fromUser($request->user());
+
+        $comic = Comic::where('name', $name)->first();
+
+        if (!$comic) {
+            return redirect()->route('root');
+        }
+
+        return view('comics.viewer', compact('comic', 'token'));
+    }
+
+    public function image(Request $request, $name, $page)
+    {
+        $comic = Comic::where('name', $name)->first();
+
+        if (!$comic) {
+            abort(404);
+            return;
+        }
+
+        if ($comic->user_id !== $request->user()->id) {
+            abort(403);
+            return;
+        }
+
+        $tmpPath = 'tmp/' . $comic->name;
+
+        if (!Storage::exists($tmpPath)) {
+            $zipFullPath = storage_path('app/comics/' . $comic->name . '.zip');
+            $dirFullPath = storage_path('app/tmp/' . $comic->name);
+            extractZip($zipFullPath, $dirFullPath);
+        }
+
+        $files = Storage::files($tmpPath);
+
+        if ($page <= 0 || $page > count($files)) {
+            abort(404);
+            return;
+        }
+
+        $imageFullPath = storage_path('app/' . $files[$page - 1]);
+
+        return response()->file($imageFullPath);
+    }
+
+    public function detailJson(Request $request, $name)
+    {
+        $comic = Comic::where('name', $name)->first();
+
+        if (!$comic) {
+            abort(404);
+            return;
+        }
+
+        if ($comic->user_id !== $request->user()->id) {
+            abort(403);
+            return;
+        }
+
+        $tmpPath = 'tmp/' . $comic->name;
+
+        if (!Storage::exists($tmpPath)) {
+            $zipFullPath = storage_path('app/comics/' . $comic->name . '.zip');
+            $dirFullPath = storage_path('app/tmp/' . $comic->name);
+            extractZip($zipFullPath, $dirFullPath);
+        }
+
+        $files = Storage::files($tmpPath);
+
+        $data = [];
+        for ($i = 1; $i <= count($files); $i++) {
+            $data[] = route('comic.image', [$name, strval($i)]);
+        }
+
+        return response()->json($data);
     }
 
     public function showUploadForm()
