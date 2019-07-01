@@ -1,7 +1,12 @@
 <template>
   <section class="viewer">
     <div class="image">
-      <img :src="link" />
+      <img
+        v-for="(link, index) in links"
+        :key="index"
+        :src="link"
+        :hidden="index !== current"
+      />
 
       <div class="control">
         <div class="prev" @click="prev"></div>
