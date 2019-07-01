@@ -9,6 +9,10 @@
         <div class="next" @click="next"></div>
       </div>
 
+      <div class="pager" :hidden="toolbarHidden">
+        <span>{{ current + 1 }} / {{ total }}</span>
+      </div>
+
       <div class="toolbar" :hidden="toolbarHidden">
         <div class="toolitem" :hidden="toolbarHidden">
           <a href="/">comics</a>
@@ -123,6 +127,22 @@ div.image {
 
     div.next {
       width: 30%;
+    }
+  }
+
+  div.pager {
+    z-index: 1;
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    background-color: #fcfaf2;
+    text-align: center;
+
+    span {
+      display: block;
+      margin-top: 20px;
+      font-size: 20px;
     }
   }
 
