@@ -1,6 +1,6 @@
 @extends('layouts.web')
-@section('title', 'Komic')
+@section('title', 'Upload')
 
 @section('content')
-<p>home</p>
+<p>upload</p>
 @stop

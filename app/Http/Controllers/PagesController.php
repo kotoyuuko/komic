@@ -8,4 +8,9 @@ class PagesController extends Controller
     {
         return view('pages.root');
     }
+
+    public function upload()
+    {
+        return view('pages.upload');
+    }
 }
