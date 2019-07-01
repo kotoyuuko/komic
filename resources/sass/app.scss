@@ -61,3 +61,28 @@
         }
     }
 }
+
+.logout-form {
+    display: none;
+}
+
+form {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+
+    p {
+        line-height: 30px;
+    }
+
+    input {
+        width: 200px;
+        height: 20px;
+    }
+
+    button {
+        margin: 0 auto;
+        height: 24px;
+        width: 100px;
+    }
+}
