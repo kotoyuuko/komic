@@ -132,4 +132,23 @@ class ComicsController extends Controller
 
         return redirect()->route('root');
     }
+
+    public function delete(Request $request, $name)
+    {
+        $comic = Comic::where('name', $name)->first();
+
+        if (!$comic) {
+            abort(404);
+            return;
+        }
+
+        if ($comic->user_id !== $request->user()->id) {
+            abort(403);
+            return;
+        }
+
+        $comic->delete();
+
+        return redirect()->route('root');
+    }
 }

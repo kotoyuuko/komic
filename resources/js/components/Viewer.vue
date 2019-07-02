@@ -17,6 +17,9 @@
         <div class="toolitem" :hidden="toolbarHidden">
           <a href="/">comics</a>
         </div>
+        <div class="toolitem" :hidden="toolbarHidden">
+          <a :href="deleteUrl">delete</a>
+        </div>
       </div>
     </div>
   </section>
@@ -37,6 +40,9 @@ export default {
     },
     link () {
       return this.links[this.current]
+    },
+    deleteUrl () {
+      return '/comic/' + this.name + '/delete'
     }
   },
   methods: {
@@ -157,7 +163,7 @@ div.image {
     div.toolitem {
       display: inline-block;
       text-align: center;
-      width: 100%;
+      width: 49%;
       height: 100%;
 
       a {
