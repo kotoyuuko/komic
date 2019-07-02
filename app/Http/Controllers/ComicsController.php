@@ -46,7 +46,7 @@ class ComicsController extends Controller
             extractZip($zipFullPath, $dirFullPath);
         }
 
-        $files = Storage::files($tmpPath);
+        $files = natsort(Storage::files($tmpPath));
 
         if ($page <= 0 || $page > count($files)) {
             abort(404);
@@ -80,7 +80,7 @@ class ComicsController extends Controller
             extractZip($zipFullPath, $dirFullPath);
         }
 
-        $files = Storage::files($tmpPath);
+        $files = natsort(Storage::files($tmpPath));
 
         $data = [];
         for ($i = 1; $i <= count($files); $i++) {
@@ -115,7 +115,7 @@ class ComicsController extends Controller
         $dirFullPath = storage_path('app/tmp/' . $storeName);
         extractZip($zipFullPath, $dirFullPath);
 
-        $files = Storage::files('tmp/' . $storeName);
+        $files = natsort(Storage::files('tmp/' . $storeName));
         $coverFullPath = storage_path('app/' . $files[0]);
         $coverImage = Image::make($coverFullPath)->resize(140, 200);
         $coverDataUrl = $coverImage->encode('data-url');
