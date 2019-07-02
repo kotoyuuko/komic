@@ -84,6 +84,10 @@ form {
         height: 24px;
     }
 
+    input:-webkit-autofill {
+        box-shadow: 0 0 0px 1000px white inset;
+    }
+
     button {
         background-color: #fff;
         border: 1px solid $sunezumi;
