@@ -147,6 +147,8 @@ class ComicsController extends Controller
             return;
         }
 
+        Storage::delete('comics/' . $comic->name . '.zip');
+
         $comic->delete();
 
         return redirect()->route('root');
