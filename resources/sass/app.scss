@@ -76,11 +76,19 @@ form {
     }
 
     input {
+        padding: 0 10px;
+        display: inline-block;
+        background-color: #fff;
+        border: 1px solid $sunezumi;
         width: 200px;
-        height: 20px;
+        height: 24px;
     }
 
     button {
+        background-color: #fff;
+        border: 1px solid $sunezumi;
+        display: inline-block;
+        font-size: 13px;
         margin: 0 auto;
         height: 24px;
         width: 100px;
