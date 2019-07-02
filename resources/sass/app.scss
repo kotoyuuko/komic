@@ -88,6 +88,10 @@ form {
         box-shadow: 0 0 0px 1000px white inset;
     }
 
+    input[type='file'] {
+        padding-top: 5px;
+    }
+
     button {
         background-color: #fff;
         border: 1px solid $sunezumi;
