@@ -18,7 +18,7 @@
           <a href="/">comics</a>
         </div>
         <div class="toolitem" :hidden="toolbarHidden">
-          <a :href="deleteUrl">delete</a>
+          <a @click="del">delete</a>
         </div>
       </div>
     </div>
@@ -68,6 +68,11 @@ export default {
     next () {
       if (this.current < this.total - 1) {
         this.current += 1
+      }
+    },
+    del () {
+      if (confirm('confirm?')) {
+        location.href = this.deleteUrl
       }
     }
   },
