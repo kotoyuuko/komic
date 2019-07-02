@@ -49,12 +49,17 @@ class ComicsController extends Controller
         $files = Storage::files($tmpPath);
         natsort($files);
 
-        if ($page <= 0 || $page > count($files)) {
+        $sortedFiles = [];
+        foreach ($files as $file) {
+            $sortedFiles[] = $file;
+        }
+
+        if ($page <= 0 || $page > count($sortedFiles)) {
             abort(404);
             return;
         }
 
-        $imageFullPath = storage_path('app/' . $files[$page - 1]);
+        $imageFullPath = storage_path('app/' . $sortedFiles[$page - 1]);
 
         return response()->file($imageFullPath);
     }
@@ -82,7 +87,6 @@ class ComicsController extends Controller
         }
 
         $files = Storage::files($tmpPath);
-        natsort($files);
 
         $data = [];
         for ($i = 1; $i <= count($files); $i++) {
@@ -119,7 +123,8 @@ class ComicsController extends Controller
 
         $files = Storage::files('tmp/' . $storeName);
         natsort($files);
-        $coverFullPath = storage_path('app/' . $files[0]);
+
+        $coverFullPath = storage_path('app/' . array_shift($files));
         $coverImage = Image::make($coverFullPath)->resize(140, 200);
         $coverDataUrl = $coverImage->encode('data-url');
 
