@@ -14,7 +14,7 @@ class UploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'file|mimes:zip|max:262144',
+            'file' => 'required|file|mimes:zip|max:262144',
         ];
     }
 }
