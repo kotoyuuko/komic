@@ -168,6 +168,7 @@ return [
         Chumper\Zipper\ZipperServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Overtrue\LaravelLang\TranslationServiceProvider::class,
+        HieuLe\Active\ActiveServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Zipper' => Chumper\Zipper\Zipper::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Active' => HieuLe\Active\Facades\Active::class,
 
     ],
 

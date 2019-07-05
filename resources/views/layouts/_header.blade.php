@@ -3,11 +3,11 @@
   <nav>
     <ul>
       @guest
-      <li><a href="{{ route('login') }}">login</a></li>
-      <li><a href="{{ route('register') }}">register</a></li>
+      <li><a class="{{ active_class(if_route('login')) }}" href="{{ route('login') }}">login</a></li>
+      <li><a class="{{ active_class(if_route('register')) }}" href="{{ route('register') }}">register</a></li>
       @else
-      <li><a href="{{ route('root') }}">home</a></li>
-      <li><a href="{{ route('upload') }}">upload</a></li>
+      <li><a class="{{ active_class(if_route('root')) }}" href="{{ route('root') }}">home</a></li>
+      <li><a class="{{ active_class(if_route('upload')) }}" href="{{ route('upload') }}">upload</a></li>
       <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">logout</a></li>
       @endguest
     </ul>

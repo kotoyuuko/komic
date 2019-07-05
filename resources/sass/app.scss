@@ -35,6 +35,11 @@
             color: $keshizumi;
           }
 
+          a.active {
+            font-weight: bold;
+            color: $kuro;
+          }
+
           a:hover {
             color: $kuro;
           }
