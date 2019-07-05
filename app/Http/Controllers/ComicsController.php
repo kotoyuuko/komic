@@ -113,11 +113,30 @@ class ComicsController extends Controller
         $zipFullPath = storage_path('app/comics/' . $storeName . '.zip');
         $dirFullPath = storage_path('app/tmp/' . $storeName);
         extractZip($zipFullPath, $dirFullPath);
+        Storage::delete('comics/' . $storeName . '.zip');
 
         $files = Storage::files('tmp/' . $storeName);
         natsort($files);
 
-        $coverFullPath = storage_path('app/' . array_shift($files));
+        $imageFiles = [];
+        $fi = new \finfo(FILEINFO_MIME_TYPE);
+        foreach ($files as $file) {
+            $fileFullPath = storage_path('app/' . $file);
+            $mime = $fi->file($fileFullPath);
+            \Log::info($file . ': ' . $mime);
+            if ($mime != 'image/png' && $mime != 'image/jpeg') {
+                continue;
+            }
+            $imageFiles[] = $file;
+        }
+        if (count($imageFiles) == 0) {
+            Storage::deleteDirectory('tmp/' . $storeName);
+            session()->flash('info', 'no image file in zip file');
+            return redirect()->back();
+        }
+        compressZip($zipFullPath, $imageFiles);
+
+        $coverFullPath = storage_path('app/' . array_shift($imageFiles));
         $coverImage = Image::make($coverFullPath)->resize(140, 200);
         $coverDataUrl = $coverImage->encode('data-url');
 
