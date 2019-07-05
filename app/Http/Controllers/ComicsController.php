@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comic;
+use App\Http\Requests\UploadRequest;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -101,17 +102,9 @@ class ComicsController extends Controller
         return view('comics.upload');
     }
 
-    public function upload(Request $request)
+    public function upload(UploadRequest $request)
     {
         $file = $request->file('file');
-
-        if (!$file->isValid()) {
-            return redirect()->back();
-        }
-
-        if ($file->extension() !== 'zip') {
-            return redirect()->back();
-        }
 
         $origName = explode('.', $file->getClientOriginalName())[0];
         $storeName = Str::random(16);
