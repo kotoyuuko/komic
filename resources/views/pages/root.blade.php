@@ -5,7 +5,7 @@
 <section class="comic-list">
   @foreach ($comics as $comic)
   <div class="comic-item">
-    <a href="{{ route('comic.viewer', $comic->name) }}">
+    <a href="{{ route('comic.viewer', $comic->name) }}" target="_blank">
       <img src="{{ $comic->cover }}">
     </a>
     <p>{{ $comic->title }}</p>
