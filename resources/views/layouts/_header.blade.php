@@ -1,5 +1,5 @@
 <header>
-  <h1>Komic</h1>
+  <h1>{{ config('app.name') }}</h1>
   <nav>
     <ul>
       @guest

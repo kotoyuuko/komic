@@ -1,5 +1,5 @@
 @extends('layouts.web')
-@section('title', 'Komic')
+@section('title', 'Home')
 
 @section('content')
 <section class="comic-list">
